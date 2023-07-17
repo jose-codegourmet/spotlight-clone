@@ -22,10 +22,17 @@ section {
     }
 }
 
+@keyframes growShrink {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.2);
+    }
+}
+
 body {
     @apply text-black dark:text-white;
-    // color: rgb(var(--foreground-rgb));
-    // background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 section {

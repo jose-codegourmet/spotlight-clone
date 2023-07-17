@@ -7,7 +7,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['images.ctfassets.net'],
+    domains: ['robohash.org'],
   },
 };
 
