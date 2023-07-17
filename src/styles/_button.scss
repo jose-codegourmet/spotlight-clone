@@ -1,0 +1,15 @@
+.pill {
+    @apply text-xs
+        font-body
+        px-4
+        py-1
+        m-[.25rem]
+        uppercase
+        rounded-full
+        text-black
+        bg-opacity-5
+        dark:text-white
+        dark:bg-black
+        dark:bg-white
+        dark:bg-opacity-5;
+}

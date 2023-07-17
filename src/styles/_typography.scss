@@ -1,0 +1,25 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-display
+        font-bold
+        text-black
+        dark:text-white;
+}
+
+h1 {
+    @apply text-5xl
+        mb-10;
+}
+
+p,
+li {
+    @apply font-body text-neutral-500 dark:text-body leading-loose;
+}
+
+a {
+    @apply hover:underline cursor-pointer;
+}
