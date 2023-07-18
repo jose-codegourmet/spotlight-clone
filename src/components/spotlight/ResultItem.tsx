@@ -39,7 +39,7 @@ const ResultItem: FC<ResultItemProps> = (props) => {
         alt={title}
         width={32}
         height={32}
-        className="h-[32px] w-[32px] rounded-full overflow-hidden bg-neutral-600 object-contain "
+        className="h-[32px] w-[32px] rounded-full overflow-hidden bg-neutral-300 object-contain "
       />
       <span>{title}</span>
       <span className="text-sm">
