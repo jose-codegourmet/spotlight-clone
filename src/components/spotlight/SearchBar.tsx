@@ -1,6 +1,10 @@
-import { useState, type FC } from 'react';
+import { useState, type FC, useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { BsSearch } from 'react-icons/bs';
+import { RootState } from '@/redux/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { closePreview } from '@/redux/reducers/spotlight';
+import { debounce } from 'lodash';
 
 interface SearchBarProps {
   className?: string;
@@ -8,13 +12,30 @@ interface SearchBarProps {
 }
 
 const SearchBar: FC<SearchBarProps> = (props) => {
+  const dispatch = useDispatch();
   const { className = '', searchFn } = props;
   const [search, setSearch] = useState<string>('');
+  const { openedObj } = useSelector((state: RootState) => state.spotlight);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const triggerSearch = useCallback(
+    debounce((value: string) => {
+      searchFn(value);
+      if (openedObj) {
+        dispatch(closePreview());
+      }
+    }, 500),
+    [openedObj],
+  );
 
   const handleTypeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    searchFn(e.target.value);
+
+    triggerSearch(e.target.value);
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // const debouncedHandleTypeSearch = useCallback(debounce(handleTypeSearch, 300), []);
 
   const componentClass = twMerge(
     `

@@ -11,6 +11,9 @@ import SearchBar from '@/components/spotlight/SearchBar';
 import { toggleDarkMode } from '@/redux/reducers/project';
 import { RootState } from '@/redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
+import { openPreview } from '@/redux/reducers/spotlight';
+import { omit } from 'lodash';
+import ResultPreview from '@/components/spotlight/ResultPreview';
 
 const HomePage: FC = () => {
   const dispatch = useDispatch();
@@ -23,6 +26,15 @@ const HomePage: FC = () => {
 
   const { data: searchResult, mutate: searchFn } = useSearch();
 
+  const handleItemClick = (item: any) => {
+    dispatch(
+      openPreview({
+        openedObj: omit(item, 'entity'),
+        objType: item.entity,
+      }),
+    );
+  };
+
   return (
     <Layout className="relative h-screen w-screen overflow-hidden flex items-center justify-center flex-col">
       {openSpotlight ? (
@@ -31,15 +43,28 @@ const HomePage: FC = () => {
           <div className=" relative z-10 spotlight text-black dark:text-white drop-shadow-lg backdrop-blur-lg shadow-black  p-2 w-full max-w-[800px] rounded-lg overflow-hidden">
             <div className="fake-bg absolute  inset-0 w-full h-full dark:bg-black bg-white opacity-80 block pointer-events-none"></div>
             <SearchBar className="z-[5] relative " searchFn={searchFn} />
-            <div className="z-[5] relative spotlight__results h-[500px] w-full flex items-stretch">
-              {searchResult?.results && (
-                <ResultList
-                  className="spotlight__results__list"
-                  searched={searchResult.searched}
-                  items={searchResult.results}
-                />
-              )}
-              <div className="spotlight__results__preview"></div>
+            <div className="z-[5] relative spotlight__results h-[500px] w-full flex items-stretch md:flex-row flex-col">
+              <div className="spotlight__results__list h-full overflow-x-hidden overflow-y-auto w-full md:w-1/2  border-r-[.5px] border-neutral-400 dark:border-neutral-600 order-2 md:order-1">
+                {searchResult?.results && (
+                  <ResultList
+                    searched={searchResult.searched}
+                    items={searchResult.results}
+                    handleItemClick={handleItemClick}
+                    entity={searchResult.entity}
+                  />
+                )}
+                {searchResult?.results && (
+                  <ResultList
+                    searched={searchResult.searched}
+                    items={searchResult.results}
+                    handleItemClick={handleItemClick}
+                    entity={searchResult.entity}
+                  />
+                )}
+              </div>
+              <div className="spotlight__results__preview w-full md:w-1/2 order-1 md:order-2">
+                <ResultPreview />
+              </div>
             </div>
           </div>
           <div className="backdrop pointer-events-none absolute inset-0 w-full h-full z-[5] bg-white dark:bg-black opacity-10 block" />

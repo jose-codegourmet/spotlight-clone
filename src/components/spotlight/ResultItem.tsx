@@ -4,15 +4,15 @@ import Image from 'next/image';
 import { AiOutlineRight } from 'react-icons/ai';
 
 interface ResultItemProps {
-  key: string;
   image: string;
   title: string;
   type: string;
   className?: string;
+  handleItemClick: () => void;
 }
 
 const ResultItem: FC<ResultItemProps> = (props) => {
-  const { key, image, title, type, className = '' } = props;
+  const { image, title, type, className = '', handleItemClick } = props;
 
   const componentClass = twMerge(
     `
@@ -33,13 +33,13 @@ const ResultItem: FC<ResultItemProps> = (props) => {
   );
 
   return (
-    <li key={key} className={componentClass}>
+    <div className={componentClass} onClick={handleItemClick}>
       <Image src={image} alt={title} width={32} height={32} className="rounded-full overflow-hidden bg-neutral-600 " />
       <span>{title}</span>
       <span className="text-sm">
         <AiOutlineRight />
       </span>
-    </li>
+    </div>
   );
 };
 

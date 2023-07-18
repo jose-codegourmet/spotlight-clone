@@ -6,12 +6,25 @@ export const API = axios.create({
 });
 
 export const searchForFn = async (search: string) => {
-  const res = await API.get('/contact', {
+  let qryConf: {
     params: {
-      search,
+      search?: string;
+      limit?: number;
+    };
+  } = {
+    params: {
       limit: 3,
     },
-  });
+  };
+
+  if (search) {
+    qryConf.params = {
+      search,
+      ...qryConf.params,
+    };
+  }
+
+  const res = await API.get('/contact', qryConf);
   return res.data;
 };
 

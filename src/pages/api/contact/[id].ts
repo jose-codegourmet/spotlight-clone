@@ -1,18 +1,25 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import CONTACTS from '@/constants/mock-contacts.json';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { apiHandler } from '@/utils/api/handlers';
+import { substringExistsInObject } from '@/utils/api/helpers';
+import createHttpError from 'http-errors';
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-type ReturnData = TContactInfo;
+type GetResponse = {
+  contact: TContactInfo;
+  entity: string;
+};
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<ReturnData>) {
-  console.log('req === ', req);
+const getContact: NextApiHandler<GetResponse> = async (req, res) => {
   const idToFind = parseInt(req.query.id as string);
-  const users: TContactInfo[] = [...CONTACTS.users];
-  const contact = users.find((u) => u.id === idToFind);
+  const contact = [...(CONTACTS.users as TContactInfo[])].find((u) => u.id === idToFind);
 
   if (contact) {
-    res.status(200).json(contact);
+    res.status(200).json({ contact, entity: 'contact' });
   } else {
-    res.status(400).json({ error: `${idToFind} does not exist` });
+    throw new createHttpError.NotFound(`User ${idToFind} not found!`);
   }
-}
+};
+
+export default apiHandler({
+  GET: getContact,
+});
