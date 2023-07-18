@@ -34,7 +34,13 @@ const ResultItem: FC<ResultItemProps> = (props) => {
 
   return (
     <div className={componentClass} onClick={handleItemClick}>
-      <Image src={image} alt={title} width={32} height={32} className="rounded-full overflow-hidden bg-neutral-600 " />
+      <Image
+        src={image}
+        alt={title}
+        width={32}
+        height={32}
+        className="h-[32px] w-[32px] rounded-full overflow-hidden bg-neutral-300 object-contain "
+      />
       <span>{title}</span>
       <span className="text-sm">
         <AiOutlineRight />

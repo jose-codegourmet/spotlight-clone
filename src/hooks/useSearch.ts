@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 
 export const API = axios.create({
   baseURL: '/api',
@@ -24,18 +24,27 @@ export const searchForFn = async (search: string) => {
     };
   }
 
-  const res = await API.get('/contact', qryConf);
+  const contactReq = API.get('/contact', qryConf);
+  const appsReq = API.get('/app', qryConf);
+
+  const res = await Promise.all([contactReq, appsReq]).then(([contactRes, appRes]) => {
+    return {
+      data: {
+        apps: {
+          ...appRes.data,
+        },
+        contacts: {
+          ...contactRes.data,
+        },
+      },
+    };
+  });
+
   return res.data;
 };
 
 const useSearch = () => {
-  const queryClient = useQueryClient();
-  const { mutate, isLoading, isSuccess, isError, data } = useMutation(searchForFn, {
-    onSuccess: (data, variables, context) => {
-      queryClient.setQueryData(['search', { searched: variables }], data);
-      return data;
-    },
-  });
+  const { mutate, isLoading, isSuccess, isError, data } = useMutation(searchForFn);
   return { mutate, isLoading, isSuccess, isError, data };
 };
 

@@ -4,6 +4,7 @@ import ContactContainer from './preview/ContactContainer';
 import { RootState } from '@/redux/reducers';
 import { type } from 'os';
 import { useSelector } from 'react-redux';
+import AppContainer from './preview/AppContainer';
 
 interface ResultPreviewProps {
   className?: string;
@@ -11,7 +12,7 @@ interface ResultPreviewProps {
 
 const ResultPreview: FC<ResultPreviewProps> = (props) => {
   const { className = '' } = props;
-  const { openedObj, objType } = useSelector((state: RootState) => state.spotlight);
+  const { openedObj, objType = '' as string } = useSelector((state: RootState) => state.spotlight);
 
   const componentClass = twMerge(
     `
@@ -32,7 +33,18 @@ const ResultPreview: FC<ResultPreviewProps> = (props) => {
     );
   }
 
-  return <div className={componentClass}>{objType === 'contact' && <ContactContainer item={openedObj} />}</div>;
+  const renderPreview = () => {
+    switch (objType) {
+      case 'contact':
+        return <ContactContainer item={openedObj} />;
+      case 'apps':
+        return <AppContainer item={openedObj} />;
+      default:
+        return null;
+    }
+  };
+
+  return <div className={componentClass}>{renderPreview()}</div>;
 };
 
 export default ResultPreview;
