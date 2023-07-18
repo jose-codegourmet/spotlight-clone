@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-import * as BUTTONSTYLES from '@/twclasses/buttonstyles';
 import { omit } from 'lodash';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
