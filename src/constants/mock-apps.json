@@ -6,6 +6,7 @@
       "version": "16.0",
       "size": "3GB",
       "lastModified": "2020-12-15",
+      "image": "/apps/office-365.svg",
       "developer": "Microsoft"
     },
     {
@@ -14,6 +15,7 @@
       "version": "4.10.3",
       "size": "156MB",
       "lastModified": "2020-12-01",
+      "image": "/apps/slack.png",
       "developer": "Slack Technologies"
     },
     {
@@ -22,6 +24,7 @@
       "version": "10.4.4",
       "size": "225MB",
       "lastModified": "2020-11-30",
+      "image": "/apps/evernote.png",
       "developer": "Evernote Corporation"
     },
     {
@@ -30,6 +33,7 @@
       "version": "7.1.3",
       "size": "68MB",
       "lastModified": "2020-12-05",
+      "image": "/apps/todoist.png",
       "developer": "Doist"
     },
     {
@@ -38,6 +42,7 @@
       "version": "2.11.5",
       "size": "72MB",
       "lastModified": "2020-12-10",
+      "image": "/apps/trello-icon.svg",
       "developer": "Atlassian"
     },
     {
@@ -46,6 +51,7 @@
       "version": "42.0",
       "size": "53MB",
       "lastModified": "2020-12-18",
+      "image": "/apps/google_drive-icon.svg",
       "developer": "Google"
     },
     {
@@ -54,6 +60,7 @@
       "version": "5.4.7",
       "size": "144MB",
       "lastModified": "2020-12-20",
+      "image": "/apps/zoomus-icon.svg",
       "developer": "Zoom Video Communications"
     },
     {
@@ -62,6 +69,7 @@
       "version": "2.0.11",
       "size": "80MB",
       "lastModified": "2020-11-26",
+      "image": "/apps/notion.svg",
       "developer": "Notion Labs"
     },
     {
@@ -70,6 +78,7 @@
       "version": "2020.013.20064",
       "size": "380MB",
       "lastModified": "2020-12-12",
+      "image": "/apps/adobe-acrobat-reader.svg",
       "developer": "Adobe Systems"
     },
     {
@@ -78,6 +87,7 @@
       "version": "1.1.0",
       "size": "100MB",
       "lastModified": "2020-12-10",
+      "image": "/apps/asana.svg",
       "developer": "Asana, Inc."
     }
   ],

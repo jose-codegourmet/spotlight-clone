@@ -1,30 +1,30 @@
-import CONTACTS from '@/constants/mock-contacts.json';
+import APP_LIST from '@/constants/mock-apps.json';
 import { apiHandler } from '@/utils/api/handlers';
 import { substringExistsInObject } from '@/utils/api/helpers';
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 type GetResponse = {
   searched: string;
-  results: TContactInfo[];
+  results: TMockApp[];
   entity: string;
   total: number;
 };
 
-const getContact: NextApiHandler<GetResponse> = async (req, res) => {
+const getApps: NextApiHandler<GetResponse> = async (req, res) => {
   const { search, limit } = req.query;
   const searched = search as string;
   const parsedLimit = parseInt(limit as string);
 
-  const users = CONTACTS.users as TContactInfo[];
+  const apps = APP_LIST.applist as TMockApp[];
 
-  let results = users.filter((user) => substringExistsInObject<TContactInfo>(searched, user));
+  let results = apps.filter((app) => substringExistsInObject<TMockApp>(searched, app));
 
   if (!results || search === '') {
     results = [];
   }
 
   if (!search) {
-    results = users;
+    results = apps;
   }
 
   if (parsedLimit) {
@@ -35,5 +35,5 @@ const getContact: NextApiHandler<GetResponse> = async (req, res) => {
 };
 
 export default apiHandler({
-  GET: getContact,
+  GET: getApps,
 });
