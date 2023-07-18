@@ -9,6 +9,7 @@ export const searchForFn = async (search: string) => {
   const res = await API.get('/contact', {
     params: {
       search,
+      limit: 3,
     },
   });
   return res.data;

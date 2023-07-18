@@ -14,13 +14,31 @@ interface ResultItemProps {
 const ResultItem: FC<ResultItemProps> = (props) => {
   const { key, image, title, type, className = '' } = props;
 
-  const componentClass = twMerge('w-full p-2 flex items-center justify-between', className);
+  const componentClass = twMerge(
+    `
+    w-full
+    p-2
+    flex
+    items-center
+    justify-between
+    cursor-pointer
+    rounded-lg
+    hover:bg-black
+    hover:bg-opacity-5
+    dark:hover:bg-white
+    dark:hover:bg-opacity-5
+    [&:not(:last-child)]:mb-5
+  `,
+    className,
+  );
 
   return (
     <li key={key} className={componentClass}>
-      <Image src={image} alt={title} width={50} height={50} className="rounded-full overflow-hidden bg-neutral-600 " />
-      <span className=" text-black">{title}</span>
-      <AiOutlineRight size={24} />
+      <Image src={image} alt={title} width={32} height={32} className="rounded-full overflow-hidden bg-neutral-600 " />
+      <span>{title}</span>
+      <span className="text-sm">
+        <AiOutlineRight />
+      </span>
     </li>
   );
 };

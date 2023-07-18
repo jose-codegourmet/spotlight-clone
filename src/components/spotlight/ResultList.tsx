@@ -11,7 +11,21 @@ interface ResultListProps {
 
 const ResultList: FC<ResultListProps> = (props) => {
   const { className = '', items: results = [], searched } = props;
-  const componentClass = twMerge('h-auto flex-col overflow-x-hidden overflow-y-auto p-4 w-full md:w-1/2', className);
+  const componentClass = twMerge(
+    `
+    h-full
+    flex-col
+    overflow-x-hidden
+    overflow-y-auto
+    p-4
+    w-full
+    md:w-1/2
+    border-r-[.5px]
+    border-neutral-400
+    dark:border-neutral-600
+  `,
+    className,
+  );
 
   const loopItems = () => {
     return results.map((item, k) => (

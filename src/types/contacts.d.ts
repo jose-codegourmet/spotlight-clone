@@ -59,3 +59,8 @@ type TContactInfo = {
   ssn: string;
   userAgent: string;
 };
+
+type TContactsReturnType = {
+  users: TContactInfo[];
+  total: number;
+};

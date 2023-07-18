@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { CONTACTS } from '@/constants/mock-contacts';
+import CONTACTS from '@/constants/mock-contacts.json';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ReturnData = {
@@ -30,10 +30,18 @@ function substringExistsInObject<TObj>(substring: string, obj: TObj): boolean {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<ReturnData>) {
   const searchTerm = (req.query.search as string) || '';
-  const { users } = CONTACTS;
+  const qryLimit = (req.query.limit as string) || '0';
+  const parsedLimit = parseInt(qryLimit);
+
+  let count = 0;
+  const users = CONTACTS.users as TContactInfo[];
 
   let results = users.filter((user) => {
-    return substringExistsInObject<TContactInfo>(searchTerm, user);
+    const ifLimitReached = parsedLimit === count;
+    if (!ifLimitReached && substringExistsInObject<TContactInfo>(searchTerm as string, user)) {
+      count++;
+      return true;
+    }
   });
 
   if (!results || searchTerm === '') {
