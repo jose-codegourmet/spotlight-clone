@@ -39,7 +39,7 @@ const HomePage: FC = () => {
     <Layout className="relative h-screen w-screen overflow-hidden flex items-center justify-center flex-col">
       {openSpotlight ? (
         <>
-          <span className="z-10 mt-[10vh] text block mx-auto py-10">{`Press "Esc" to close Spotlight`}</span>
+          <span className="z-10 text block mx-auto py-10">{`Press "Esc" to close Spotlight`}</span>
           <div className=" relative z-10 spotlight text-black dark:text-white drop-shadow-lg backdrop-blur-lg shadow-black  p-2 w-full max-w-[800px] rounded-lg overflow-hidden">
             <div className="fake-bg absolute  inset-0 w-full h-full dark:bg-black bg-white opacity-80 block pointer-events-none"></div>
             <SearchBar className="z-[5] relative " searchFn={searchFn} />
