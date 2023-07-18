@@ -23,7 +23,6 @@ function errorHandler(err: unknown, res: NextApiResponse<ErrorResponse>) {
 }
 
 export function apiHandler(handler: ApiMethodHandlers) {
-  console.log('apiHandler === ', handler);
   return async (req: NextApiRequest, res: NextApiResponse<ErrorResponse>) => {
     try {
       const method = req.method ? (req.method.toUpperCase() as keyof ApiMethodHandlers) : undefined;
