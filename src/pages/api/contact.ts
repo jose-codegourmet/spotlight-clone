@@ -3,6 +3,7 @@ import { CONTACTS } from '@/constants/mock-contacts';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ReturnData = {
+  searched: string;
   results: TContactInfo[];
   total: number;
 };
@@ -28,12 +29,16 @@ function substringExistsInObject<TObj>(substring: string, obj: TObj): boolean {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<ReturnData>) {
-  const searchTerm = req.query.search as string;
+  const searchTerm = (req.query.search as string) || '';
   const { users } = CONTACTS;
 
-  const results = users.filter((user) => {
+  let results = users.filter((user) => {
     return substringExistsInObject<TContactInfo>(searchTerm, user);
   });
 
-  res.status(200).json({ results, total: results.length });
+  if (!results || searchTerm === '') {
+    results = [];
+  }
+
+  res.status(200).json({ searched: searchTerm, results, total: results.length });
 }

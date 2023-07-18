@@ -1,36 +1,39 @@
 import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Image from 'next/image';
+import ResultItem from './ResultItem';
 
 interface ResultListProps {
+  searched: string;
   className?: string;
-  items: any[];
+  items?: any[];
 }
 
 const ResultList: FC<ResultListProps> = (props) => {
-  const { className = '', items: results } = props;
+  const { className = '', items: results = [], searched } = props;
   const componentClass = twMerge('h-auto flex-col overflow-x-hidden overflow-y-auto p-4 w-full md:w-1/2', className);
 
   const loopItems = () => {
     return results.map((item, k) => (
-      <li key={k} className="w-full p-2 flex items-center justify-start">
-        <Image
-          src={item.image}
-          alt={`${item.username} avatar`}
-          width={50}
-          height={50}
-          className="rounded-full overflow-hidden bg-neutral-600 "
-        />
-        <span className="ml-auto text-black">
-          {item.firstName} {item.lastName}
-        </span>
-      </li>
+      <ResultItem
+        key={`${k}-${item.id}-${item.firstName.toLowerCase().replace(' ', '-')}`}
+        image={item.image}
+        title={`${item.firstName} ${item.lastName}`}
+        type="user"
+      />
     ));
   };
 
   return (
     <div className={componentClass}>
-      <ul>{loopItems()}</ul>
+      {results.length > 0 && <ul>{loopItems()}</ul>}
+      {searched !== '' && results.length === 0 && (
+        <div className="black h-full w-full">
+          <span className="mt-10 w-full block text-center text-sm text-italic text-black dark:text-white">
+            No results found
+          </span>
+        </div>
+      )}
     </div>
   );
 };
