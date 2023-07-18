@@ -21,7 +21,7 @@ const font_body = Work_Sans({
 const Layout: FC<LayoutProps> = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { isMobileOpen, isDarkMode } = useSelector((state: RootState) => state.project);
+  const { isDarkMode } = useSelector((state: RootState) => state.project);
 
   const { children, className = '' } = props;
 
@@ -45,9 +45,10 @@ const Layout: FC<LayoutProps> = (props) => {
     >
       <button
         onClick={handleToggleDarkMode}
-        className="fixed top-4 z-[99] text-2xl right-4 p-2 rounded-full bg-black bg-opacity-50 text-blue-500 dark:text-amber-400"
+        className="fixed top-4 z-[99] text-2xl right-4 p-2 rounded-full bg-black bg-opacity-50 text-blue-500 dark:text-amber-400 flex items-center justify-center"
       >
         {isDarkMode ? <BsSunFill /> : <BsFillMoonFill />}
+        <span className="text-xs px-4 text-white">{`Press "Ctrl+D"`}</span>
       </button>
       <main className={componentClass}>{children}</main>
     </div>

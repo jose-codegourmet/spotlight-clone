@@ -38,7 +38,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
       </div>
       <input
         type="text"
-        placeholder="Enter Search term"
+        placeholder="Spotlight Search"
         onChange={handleTypeSearch}
         value={search}
         className="text-2xl p-2 w-full bg-transparent outline-none"

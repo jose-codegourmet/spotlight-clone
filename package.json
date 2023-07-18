@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/http-errors": "^2.0.1",
     "@types/lodash": "^4.14.195",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
@@ -20,6 +21,7 @@
     "classnames": "^2.3.2",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
+    "http-errors": "^2.0.0",
     "next": "13.4.6",
     "postcss": "8.4.24",
     "react": "18.2.0",
