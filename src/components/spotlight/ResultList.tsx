@@ -24,17 +24,24 @@ const ResultList: FC<ResultListProps> = (props) => {
   );
 
   const loopItems = () => {
-    return results.map((item, k) => (
-      <li key={`${k}-${item.id}-${item.firstName.toLowerCase().replace(' ', '-')}`}>
-        <ResultItem
-          key={`${k}-${item.id}-${item.firstName.toLowerCase().replace(' ', '-')}`}
-          image={item.image}
-          title={`${item.firstName} ${item.lastName}`}
-          type="user"
-          handleItemClick={() => handleItemClick({ ...item, entity })}
-        />
-      </li>
-    ));
+    return results.map((item, k) => {
+      const loopKey =
+        entity === 'contact' ? `${k}-${item.id}-${item.firstName}` : `${k}-${item.id}-${item.applicationName}`;
+
+      const loopTitle = entity === 'contact' ? `${item.firstName} ${item.lastName}` : item.applicationName;
+
+      return (
+        <li key={loopKey}>
+          <ResultItem
+            key={loopKey}
+            image={item.image}
+            title={loopTitle}
+            type={entity}
+            handleItemClick={() => handleItemClick({ ...item, entity })}
+          />
+        </li>
+      );
+    });
   };
 
   return (

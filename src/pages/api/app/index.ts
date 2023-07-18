@@ -31,7 +31,7 @@ const getApps: NextApiHandler<GetResponse> = async (req, res) => {
     results = results.slice(0, parsedLimit);
   }
 
-  res.status(200).json({ searched, results, total: results.length, entity: 'contact' });
+  res.status(200).json({ searched, results, total: results.length, entity: 'apps' });
 };
 
 export default apiHandler({

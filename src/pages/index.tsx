@@ -26,6 +26,8 @@ const HomePage: FC = () => {
 
   const { data: searchResult, mutate: searchFn } = useSearch();
 
+  console.log('searchResult === ', searchResult);
+
   const handleItemClick = (item: any) => {
     dispatch(
       openPreview({
@@ -45,20 +47,20 @@ const HomePage: FC = () => {
             <SearchBar className="z-[5] relative " searchFn={searchFn} />
             <div className="z-[5] relative spotlight__results h-[500px] w-full flex items-stretch md:flex-row flex-col">
               <div className="spotlight__results__list h-full overflow-x-hidden overflow-y-auto w-full md:w-1/2  border-r-[.5px] border-neutral-400 dark:border-neutral-600 order-2 md:order-1">
-                {searchResult?.results && (
+                {searchResult?.contacts?.results && (
                   <ResultList
-                    searched={searchResult.searched}
-                    items={searchResult.results}
+                    searched={searchResult.contacts.searched}
+                    items={searchResult.contacts.results}
                     handleItemClick={handleItemClick}
-                    entity={searchResult.entity}
+                    entity={searchResult.contacts.entity}
                   />
                 )}
-                {searchResult?.results && (
+                {searchResult?.apps?.results && (
                   <ResultList
-                    searched={searchResult.searched}
-                    items={searchResult.results}
+                    searched={searchResult.apps?.searched}
+                    items={searchResult.apps?.results}
                     handleItemClick={handleItemClick}
-                    entity={searchResult.entity}
+                    entity={searchResult.apps?.entity}
                   />
                 )}
               </div>
