@@ -26,8 +26,6 @@ const HomePage: FC = () => {
 
   const { data: searchResult, mutate: searchFn } = useSearch();
 
-  console.log('searchResult === ', searchResult);
-
   const handleItemClick = (item: any) => {
     dispatch(
       openPreview({
@@ -72,7 +70,10 @@ const HomePage: FC = () => {
           <div className="backdrop pointer-events-none absolute inset-0 w-full h-full z-[5] bg-white dark:bg-black opacity-10 block" />
         </>
       ) : (
-        <div className="relative z-[10] p-4 rounded-lg bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-90 flex justify-self-center justify-center">
+        <div
+          onClick={() => setOpenSpotlight(true)}
+          className="relative z-[10] p-4 rounded-lg bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-90 flex justify-self-center justify-center"
+        >
           {`Press "Ctrl + Space" to open Spotlight`}
         </div>
       )}
